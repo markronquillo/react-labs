@@ -48,15 +48,18 @@ function fetchPosts(subreddit) {
 
 function shouldFetchPosts(state, subreddit) {
   const posts = state.postsBySubreddit[subreddit]
+
+  // if there are no cached posts, then fetch
   if (!posts) {
     return true
   } else if (posts.isFetching) {
+  	// if it is currently fetching, then no
     return false
   } else {
+  	// else base it on didInvalidate
     return posts.didInvalidate
   }
 }
-
 
 
 export function fetchPostsIfNeeded(subreddit) {
